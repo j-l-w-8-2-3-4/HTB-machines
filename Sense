@@ -1,0 +1,2 @@
+nmap -sC -sV 10.129.4.227 -vvv -oA nmap/nmap1
+
