@@ -1,2 +1,26 @@
+Original scan
 nmap -sC -sV 10.129.4.227 -vvv -oA nmap/nmap1
 
+Ports
+80,443
+
+Directory brute forcing / file discovery
+ffuf -u https://10.129.4.227/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e txt -o fuzz1
+dirbuster -t 25 -e txt -u https://10.129.4.227/ -l /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+gobuster dir -t 25 -k -e -x txt -u https://10.129.4.227/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -o sense/gobuster2
+
+Directories / Files
+https://10.129.4.227/system-users.txt     (Status: 200) [Size: 106]
+https://10.129.4.227/changelog.txt        (Status: 200) [Size: 271]
+https://10.129.4.227/filebrowser          (Status: 301) [Size: 0] [--> https://10.129.4.227/filebrowser/]
+https://10.129.4.227/themes               (Status: 301) [Size: 0] [--> https://10.129.4.227/themes/]
+https://10.129.4.227/css                  (Status: 301) [Size: 0] [--> https://10.129.4.227/css/]
+https://10.129.4.227/includes             (Status: 301) [Size: 0] [--> https://10.129.4.227/includes/]
+https://10.129.4.227/javascript           (Status: 301) [Size: 0] [--> https://10.129.4.227/javascript/]
+https://10.129.4.227/classes              (Status: 301) [Size: 0] [--> https://10.129.4.227/classes/]
+https://10.129.4.227/widgets              (Status: 301) [Size: 0] [--> https://10.129.4.227/widgets/]
+https://10.129.4.227/tree                 (Status: 301) [Size: 0] [--> https://10.129.4.227/tree/]
+https://10.129.4.227/shortcuts            (Status: 301) [Size: 0] [--> https://10.129.4.227/shortcuts/]
+https://10.129.4.227/installer            (Status: 301) [Size: 0] [--> https://10.129.4.227/installer/]
+https://10.129.4.227/wizards              (Status: 301) [Size: 0] [--> https://10.129.4.227/wizards/]
+https://10.129.4.227/csrf                 (Status: 301) [Size: 0] [--> https://10.129.4.227/csrf/]
